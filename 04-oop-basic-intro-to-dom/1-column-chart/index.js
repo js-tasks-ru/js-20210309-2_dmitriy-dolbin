@@ -43,20 +43,14 @@ export default class ColumnChart {
     const element = document.createElement('div');
     element.innerHTML = this.template;
     this.element = element.firstElementChild;
-
-    if (this.data.length) {
+    if (this.data.length){
       this.element.classList.remove('column-chart_loading');
     }
-
-    const elements  = element.querySelectorAll('[data-element]');
-    let TempElem = this.element;
-    this.subElements = (TempElem)=>{
-      const elements = element.querySelectorAll('[data-element]');
-      return [...elements].reduce((accum, subElement) =>{
-        accum[subElement.dataset.element] = subElement;
-        return accum;
-      }, {});
-    }
+    const elements = element.querySelectorAll('[data-element]');
+    this.subElements = [...elements].reduce((accum, subElement) =>{
+      accum[subElement.dataset.element] = subElement;
+      return accum;
+    }, {});
   }
   getColumnBody(data){
     const maxValue = Math.max(...data);
